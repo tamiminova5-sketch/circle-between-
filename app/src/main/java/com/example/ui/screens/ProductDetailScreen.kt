@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -64,7 +65,7 @@ fun ProductDetailScreen(productId: String, onNavigateBack: () -> Unit) {
                         text = "Premium Minimal Sneakers",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).basicMarquee(),
                         maxLines = 1,
                         softWrap = false,
                         overflow = TextOverflow.Clip

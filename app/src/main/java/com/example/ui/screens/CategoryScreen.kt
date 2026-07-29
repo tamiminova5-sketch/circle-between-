@@ -4,6 +4,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -112,7 +113,8 @@ fun CategoryScreen(modifier: Modifier = Modifier) {
                         softWrap = false,
                         overflow = TextOverflow.Clip,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.basicMarquee()
                     )
                 }
             }

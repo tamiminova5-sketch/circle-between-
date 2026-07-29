@@ -2,6 +2,7 @@ package com.example.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -42,7 +43,7 @@ fun SearchScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) -> Un
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(horizontal = 16.dp, vertical = 6.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = onNavigateBack) {
@@ -52,7 +53,7 @@ fun SearchScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) -> Un
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                modifier = Modifier.weight(1f).height(52.dp),
+                modifier = Modifier.weight(1f).height(40.dp),
                 placeholder = { Text("Search products...") },
                 shape = RoundedCornerShape(26.dp),
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },

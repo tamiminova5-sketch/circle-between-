@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -41,8 +42,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -102,7 +106,7 @@ fun HomeHeader(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(horizontal = 16.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Logo
@@ -135,7 +139,7 @@ fun HomeHeader(
             }
         }
         
-        Box(modifier = Modifier.weight(1f).height(48.dp).clickable { onNavigateToSearch() }) {
+        Box(modifier = Modifier.weight(1f).height(40.dp).clickable { onNavigateToSearch() }) {
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = {},
@@ -468,7 +472,8 @@ fun CategorySection(onNavigateToCategory: () -> Unit = {}) {
                                 softWrap = false,
                                 overflow = TextOverflow.Clip,
                                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                                lineHeight = 10.sp
+                                lineHeight = 10.sp,
+                                modifier = Modifier.basicMarquee()
                             )
                         }
                     }
@@ -637,7 +642,11 @@ fun ProductCard(
                             textAlign = TextAlign.Center,
                             maxLines = 1,
                             softWrap = false,
-                            modifier = Modifier.padding(bottom = 1.dp)
+                            style = androidx.compose.ui.text.TextStyle(
+                                platformStyle = androidx.compose.ui.text.PlatformTextStyle(
+                                    includeFontPadding = false
+                                )
+                            )
                         )
                     }
                 }
@@ -692,7 +701,7 @@ fun ProductCard(
                     softWrap = false,
                     overflow = TextOverflow.Clip,
                     lineHeight = 16.sp,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().basicMarquee()
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 
@@ -800,7 +809,11 @@ fun CircleDealProductCard(
                         textAlign = TextAlign.Center,
                         maxLines = 1,
                         softWrap = false,
-                        modifier = Modifier.padding(bottom = 1.dp)
+                        style = androidx.compose.ui.text.TextStyle(
+                            platformStyle = androidx.compose.ui.text.PlatformTextStyle(
+                                includeFontPadding = false
+                            )
+                        )
                     )
                 }
                 
@@ -865,7 +878,8 @@ fun CircleDealProductCard(
                     maxLines = 1,
                     softWrap = false,
                     overflow = TextOverflow.Clip,
-                    lineHeight = 14.sp
+                    lineHeight = 14.sp,
+                    modifier = Modifier.basicMarquee()
                 )
                 
                 Row(verticalAlignment = Alignment.Bottom, modifier = Modifier.padding(top = 2.dp)) {
