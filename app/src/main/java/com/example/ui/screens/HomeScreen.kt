@@ -466,7 +466,7 @@ fun CategorySection(onNavigateToCategory: () -> Unit = {}) {
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 1,
                                 softWrap = false,
-                                overflow = TextOverflow.Ellipsis,
+                                overflow = TextOverflow.Clip,
                                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                                 lineHeight = 10.sp
                             )
@@ -690,7 +690,7 @@ fun ProductCard(
                     fontWeight = FontWeight.Medium,
                     maxLines = 1,
                     softWrap = false,
-                    overflow = TextOverflow.Ellipsis,
+                    overflow = TextOverflow.Clip,
                     lineHeight = 16.sp,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -864,7 +864,7 @@ fun CircleDealProductCard(
                     color = Color.Black,
                     maxLines = 1,
                     softWrap = false,
-                    overflow = TextOverflow.Ellipsis,
+                    overflow = TextOverflow.Clip,
                     lineHeight = 14.sp
                 )
                 

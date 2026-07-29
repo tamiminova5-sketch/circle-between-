@@ -67,7 +67,7 @@ fun ProductDetailScreen(productId: String, onNavigateBack: () -> Unit) {
                         modifier = Modifier.weight(1f),
                         maxLines = 1,
                         softWrap = false,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Clip
                     )
                     Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }

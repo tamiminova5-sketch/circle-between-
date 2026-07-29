@@ -110,7 +110,7 @@ fun CategoryScreen(modifier: Modifier = Modifier) {
                         fontSize = 12.sp,
                         maxLines = 1,
                         softWrap = false,
-                        overflow = TextOverflow.Ellipsis,
+                        overflow = TextOverflow.Clip,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                         fontWeight = FontWeight.Medium
                     )
