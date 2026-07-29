@@ -29,7 +29,14 @@ fun CircleBazarApp() {
                         unreadNotificationCount = unreadCount,
                         onNavigateToSearch = { navController.navigate("search") }, 
                         onNavigateToProduct = { navController.navigate("product/$it") },
-                        onNavigateToCircleDeals = { navController.navigate("circle_deals") },
+                        onNavigateToCircleDeals = { selectedDeal ->
+                            if (selectedDeal != null) {
+                                val encodedTitle = java.net.URLEncoder.encode(selectedDeal, "UTF-8")
+                                navController.navigate("circle_deals?selectedDeal=$encodedTitle")
+                            } else {
+                                navController.navigate("circle_deals")
+                            }
+                        },
                         onNavigateToNotification = {
                             
                             navController.navigate("notifications")
@@ -39,10 +46,18 @@ fun CircleBazarApp() {
                 composable("notifications") {
                     NotificationScreen(onNavigateBack = { navController.popBackStack() })
                 }
-                composable("circle_deals") {
+                composable(
+                    route = "circle_deals?selectedDeal={selectedDeal}",
+                    arguments = listOf(androidx.navigation.navArgument("selectedDeal") { 
+                        type = androidx.navigation.NavType.StringType
+                        nullable = true 
+                    })
+                ) { backStackEntry ->
+                    val selectedDeal = backStackEntry.arguments?.getString("selectedDeal")
                     CircleDealsScreen(
                         onNavigateBack = { navController.popBackStack() }, 
-                        onNavigateToProduct = { navController.navigate("product/$it") }
+                        onNavigateToProduct = { navController.navigate("product/$it") },
+                        selectedDealTitle = selectedDeal
                     )
                 }
                 composable("search") {

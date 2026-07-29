@@ -31,7 +31,7 @@ import com.example.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CircleDealsScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) -> Unit) {
+fun CircleDealsScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) -> Unit, selectedDealTitle: String? = null) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,6 +72,12 @@ fun CircleDealsScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) 
                 Deal("Noise Cancelling Headphones", "৳3,450", "৳5,900", R.drawable.img_product_headphones, "-41%", 0.09f, "Only 4 Left")
             )
             
+            val sortedDeals = if (selectedDealTitle != null) {
+                deals.sortedByDescending { it.title == selectedDealTitle }
+            } else {
+                deals
+            }
+                
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 contentPadding = PaddingValues(16.dp),
@@ -79,7 +85,7 @@ fun CircleDealsScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) 
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                items(deals) { deal ->
+                items(sortedDeals) { deal ->
                     ProductCard(
                         id = "1",
                         title = deal.title,

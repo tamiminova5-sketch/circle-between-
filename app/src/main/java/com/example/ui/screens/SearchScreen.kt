@@ -53,7 +53,7 @@ fun SearchScreen(onNavigateBack: () -> Unit, onNavigateToProduct: (String) -> Un
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
-                modifier = Modifier.weight(1f).height(40.dp),
+                modifier = Modifier.weight(1f).height(36.dp),
                 placeholder = { Text("Search products...") },
                 shape = RoundedCornerShape(26.dp),
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },

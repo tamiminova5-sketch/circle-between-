@@ -73,7 +73,7 @@ fun HomeScreen(
     onNavigateToSearch: () -> Unit, 
     onNavigateToProduct: (String) -> Unit, 
     onNavigateToCategory: () -> Unit = {},
-    onNavigateToCircleDeals: () -> Unit = {},
+    onNavigateToCircleDeals: (String?) -> Unit = {},
     onNavigateToNotification: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
@@ -139,7 +139,7 @@ fun HomeHeader(
             }
         }
         
-        Box(modifier = Modifier.weight(1f).height(40.dp).clickable { onNavigateToSearch() }) {
+        Box(modifier = Modifier.weight(1f).height(36.dp).clickable { onNavigateToSearch() }) {
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = {},
@@ -311,10 +311,21 @@ fun HeroBanner() {
 }
 
 @Composable
-fun CircleDealsSection(onNavigateToProduct: (String) -> Unit, onNavigateToCircleDeals: () -> Unit = {}) {
+fun CircleDealsSection(onNavigateToProduct: (String) -> Unit, onNavigateToCircleDeals: (String?) -> Unit = {}) {
     val configuration = LocalConfiguration.current
-    val cardWidth = configuration.screenWidthDp.dp * 0.23f
-    val cardHeight = configuration.screenHeightDp.dp * 0.20f
+    val cardWidth = configuration.screenWidthDp.dp * 0.22f
+    val cardHeight = 94.dp
+
+    val listState = androidx.compose.foundation.lazy.rememberLazyListState()
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        while(true) {
+            kotlinx.coroutines.delay(3000)
+            if (listState.layoutInfo.totalItemsCount > 0) {
+                val nextIndex = (listState.firstVisibleItemIndex + 1) % listState.layoutInfo.totalItemsCount
+                listState.animateScrollToItem(nextIndex)
+            }
+        }
+    }
 
     Column(modifier = Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 12.dp)) {
         Row(
@@ -340,7 +351,7 @@ fun CircleDealsSection(onNavigateToProduct: (String) -> Unit, onNavigateToCircle
             
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable { onNavigateToCircleDeals() }
+                modifier = Modifier.clickable { onNavigateToCircleDeals(null) }
             ) {
                 Text("Shop More", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, fontSize = 10.sp)
                 Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(12.dp))
@@ -361,6 +372,7 @@ fun CircleDealsSection(onNavigateToProduct: (String) -> Unit, onNavigateToCircle
         Spacer(modifier = Modifier.height(12.dp))
         
         LazyRow(
+            state = listState,
             contentPadding = PaddingValues(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -379,7 +391,7 @@ fun CircleDealsSection(onNavigateToProduct: (String) -> Unit, onNavigateToCircle
                     discount = deal.discount,
                     progress = deal.progress,
                     leftText = deal.leftText,
-                    onNavigateToProduct = { onNavigateToProduct("deal_1") },
+                    onNavigateToProduct = { onNavigateToCircleDeals(deal.title) },
                     modifier = Modifier.width(cardWidth).height(cardHeight)
                 )
             }
@@ -622,16 +634,12 @@ fun ProductCard(
                 
                 // Discount Badge
                 if (discount != null) {
-                    val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-                    val dWidth = (configuration.screenWidthDp * 0.06).dp
-                    val dHeight = (configuration.screenHeightDp * 0.02).dp
                     Box(
                         modifier = Modifier
                             .align(Alignment.TopStart)
                             .padding(top = 8.dp, start = 8.dp)
-                            .clip(RoundedCornerShape(4.dp))
-                            .background(Color(0xFFE53935))
-                            .size(dWidth, dHeight),
+                            .background(Color(0xFFE53935), RoundedCornerShape(4.dp))
+                            .padding(horizontal = 4.dp, vertical = 2.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -789,32 +797,30 @@ fun CircleDealProductCard(
                 )
                 
                 // Discount Badge - Custom Shape Red Background
-                val configuration = androidx.compose.ui.platform.LocalConfiguration.current
-                val dWidth = (configuration.screenWidthDp * 0.06).dp
-                val dHeight = (configuration.screenHeightDp * 0.02).dp
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                        .padding(top = 8.dp, start = 8.dp)
-                        .clip(RoundedCornerShape(4.dp))
-                        .background(Color(0xFFE53935))
-                        .size(dWidth, dHeight),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = discount, 
-                        color = Color.White, 
-                        fontSize = 8.sp, 
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1,
-                        softWrap = false,
-                        style = androidx.compose.ui.text.TextStyle(
-                            platformStyle = androidx.compose.ui.text.PlatformTextStyle(
-                                includeFontPadding = false
+                if (discount != null) {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
+                            .padding(top = 8.dp, start = 8.dp)
+                            .background(Color(0xFFE53935), RoundedCornerShape(4.dp))
+                            .padding(horizontal = 4.dp, vertical = 2.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = discount, 
+                            color = Color.White, 
+                            fontSize = 8.sp, 
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            softWrap = false,
+                            style = androidx.compose.ui.text.TextStyle(
+                                platformStyle = androidx.compose.ui.text.PlatformTextStyle(
+                                    includeFontPadding = false
+                                )
                             )
                         )
-                    )
+                    }
                 }
                 
                 // Favorite Icon

@@ -35,7 +35,7 @@ fun MainScreen(
     unreadNotificationCount: Int = 0,
     onNavigateToSearch: () -> Unit, 
     onNavigateToProduct: (String) -> Unit, 
-    onNavigateToCircleDeals: () -> Unit,
+    onNavigateToCircleDeals: (String?) -> Unit,
     onNavigateToNotification: () -> Unit
 ) {
     var selectedItem by remember { mutableIntStateOf(0) }
