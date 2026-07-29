@@ -1,4 +1,5 @@
 package com.example.ui.screens
+import androidx.compose.ui.text.style.TextOverflow
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -63,7 +64,10 @@ fun ProductDetailScreen(productId: String, onNavigateBack: () -> Unit) {
                         text = "Premium Minimal Sneakers",
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis
                     )
                     Icon(Icons.Default.FavoriteBorder, contentDescription = "Wishlist", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }

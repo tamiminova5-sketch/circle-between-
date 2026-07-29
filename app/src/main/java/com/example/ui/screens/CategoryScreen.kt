@@ -1,4 +1,5 @@
 package com.example.ui.screens
+import androidx.compose.ui.text.style.TextOverflow
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -107,7 +108,9 @@ fun CategoryScreen(modifier: Modifier = Modifier) {
                     Text(
                         text = category,
                         fontSize = 12.sp,
-                        maxLines = 2,
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                         fontWeight = FontWeight.Medium
                     )

@@ -407,12 +407,12 @@ fun CategorySection(onNavigateToCategory: () -> Unit = {}) {
     val categories = listOf<Triple<String, ImageVector, Color>>(
         Triple("Electronics", Icons.Outlined.Headphones, Color(0xFF1976D2)),
         Triple("Fashion", Icons.Outlined.Checkroom, Color(0xFF43A047)),
-        Triple("Home\n& Living", Icons.Outlined.Weekend, Color(0xFFF57C00)),
+        Triple("Home & Living", Icons.Outlined.Weekend, Color(0xFFF57C00)),
         Triple("Beauty", Icons.Outlined.Face, Color(0xFFD81B60)),
         Triple("Groceries", Icons.Outlined.ShoppingBasket, Color(0xFF7CB342)),
         Triple("Mobiles", Icons.Outlined.PhoneIphone, Color(0xFF1E88E5)),
         Triple("Appliances", Icons.Outlined.LocalLaundryService, Color(0xFF546E7A)),
-        Triple("Baby\n& Kids", Icons.Outlined.ChildCare, Color(0xFF8D6E63)),
+        Triple("Baby & Kids", Icons.Outlined.ChildCare, Color(0xFF8D6E63)),
         Triple("Sports", Icons.Outlined.SportsSoccer, Color(0xFF212121)),
         Triple("Automotive", Icons.Outlined.DirectionsCar, Color(0xFF455A64)),
         Triple("Books", Icons.Outlined.MenuBook, Color(0xFF5E35B1)),
@@ -464,7 +464,8 @@ fun CategorySection(onNavigateToCategory: () -> Unit = {}) {
                                 fontSize = 9.sp,
                                 color = Color.Black,
                                 fontWeight = FontWeight.SemiBold,
-                                maxLines = 2,
+                                maxLines = 1,
+                                softWrap = false,
                                 overflow = TextOverflow.Ellipsis,
                                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                                 lineHeight = 10.sp
@@ -687,8 +688,8 @@ fun ProductCard(
                     inlineContent = inlineContent,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
-                    minLines = 2,
-                    maxLines = 2,
+                    maxLines = 1,
+                    softWrap = false,
                     overflow = TextOverflow.Ellipsis,
                     lineHeight = 16.sp,
                     modifier = Modifier.fillMaxWidth()
@@ -861,8 +862,8 @@ fun CircleDealProductCard(
                     fontSize = 11.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
-                    minLines = 2,
-                    maxLines = 2,
+                    maxLines = 1,
+                    softWrap = false,
                     overflow = TextOverflow.Ellipsis,
                     lineHeight = 14.sp
                 )
